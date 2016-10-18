@@ -1,0 +1,19 @@
+<body class="bioRhyme">
+
+<h1>My Cart</h1>
+
+<div>
+	<% @line_items.each do |line_item| %>
+		<ul>
+			<li><%= line_item.product.name %></li>
+			<li><%= number_to_currency line_item.product.price %>/ea.</li>
+			<li>Qty: <%= line_item.quantity %></li>
+			<li>Subtotal: <%= number_to_currency line_item.line_item_total %></li>
+		</ul>
+	<% end %>
+</div>
+
+<div>
+	<%= link_to "Proceed to Checkout", checkout_path, class: "btn btn-success" %>
+</div>
+</body>

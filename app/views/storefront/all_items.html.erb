@@ -1,0 +1,14 @@
+<body class="bioRhyme">
+<h1>Welcome to The Store!</h1>
+<p>Let us help you spend that <strong>Money!</strong></p>
+
+<%= render 'productloop' %>
+
+<% if user_signed_in? && current_user.admin? %>
+
+<% if can? :create, Product %>
+    <%= link_to 'New Product', new_product_path, class: "btn btn-success" %>
+  <% end %>
+<% end %>
+
+</body>

@@ -1,0 +1,15 @@
+<body class="bioRhyme">
+
+<% if current_user.admin? %>
+	<h1>Editing Product</h1>
+
+	<%= render 'form', product: @product %>
+
+	<%= link_to 'Show', @product %> |
+	<%= link_to 'Back', products_path %>
+
+<% else %>
+  <%= render 'not_allowed' %>
+<% end %>
+
+</body>

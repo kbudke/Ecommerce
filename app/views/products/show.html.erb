@@ -1,0 +1,52 @@
+
+<body class="bioRhyme">
+
+<div class="row">
+  <div class="col-md-4">
+    <p>
+      <%= image_tag @product.image.url, width: "500", alt: @product.name, class: "img-responsive" %>
+    </p>
+  </div>
+  <div class="col-md-8">
+    <h3><%= @product.name %></h3>
+    <p>
+      made by: <strong><%= link_to @product.brand, branding_path(brand: @product.brand) %></strong>
+    </p>
+    <h4><%= number_to_currency @product.price %></h4>
+    <p><strong><%= @product.quantity %></strong> in stock</p>
+    <% if @product.quantity > 0 %>
+      <p id="notice"><%= notice %></p>
+      <div>
+        <%= form_tag add_to_cart_path do %>
+          <%= hidden_field_tag :product_id, @product.id %>
+          <%= number_field_tag :quantity, nil, placeholder: "How Many?", min: 1 %>
+          <%= submit_tag "Add to Cart", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <p>Found in our  <%= link_to @product.category.name, categorical_path(cat_id: @product.category.id) %> Store</p>
+    <p>
+      <%= @product.description.html_safe %>
+    </p>
+  </div>
+</div>
+<p>
+  <%= link_to "Back", :back %>
+</p>
+<% if can? :manage, @product %>
+  <p>
+    <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-warning" %>
+  </p>
+<% end %>
+
+
+
+
+
+
+</body>
+

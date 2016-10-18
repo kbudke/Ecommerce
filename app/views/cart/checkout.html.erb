@@ -1,0 +1,20 @@
+<body class="bioRhyme">
+
+<h2>Thanks for shopping with us!</h2>
+<p>Let's review your order:</p>
+
+<% if @order != nil %>
+	<% @order.order_items.each do |key, value| %>
+		<ul>	
+			<li><%= Product.find(key).name %>, <%= value %></li>
+		</ul>
+	<% end %>
+
+	<p>
+	  <strong>Order Total:</strong> <%= number_to_currency @order.grand_total %>
+	</p>
+<% else %>
+	<p>No order found.</p>
+	<p>You hit refresh, didn't you?</p>
+<% end %>
+</body>

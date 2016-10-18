@@ -1,0 +1,57 @@
+<body class="bioRhyme">
+
+<div class="row">
+	<% @products.each do |product| %>
+		<div class="col-md-4">
+			<div class="well center-it">
+				<p>
+					<%= image_tag product.image.url, class: "index-product-pics" %>
+				</p>
+				<h3><%= link_to product.name, product %></h3>
+				<p><%= number_to_currency product.price %></p>
+				<p>
+					<a href="#" data-toggle="modal" data-target="#myModal_<%= product.id %>">
+						<i class="glyphicon glyphicon-plus"></i> Quick Info
+					</a>
+				</p>
+			</div>
+		</div>
+
+		<div class="modal fade" id="myModal_<%= product.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel"><%= link_to product.name, product %></h4>
+		      </div>
+		      <div class="modal-body">
+		        <p><%= image_tag product.image.url, class: "index-product-pics" %></p>
+		        <p><%= number_to_currency product.price %></p>
+		        <p id="descr<%= product.id %>"><%= product.description[0..50] %><span id="expand_descr<%= product.id %>">...</span></p>
+		      </div>
+		      <% if product.quantity > 0 %>
+			      <div class="modal-footer">
+			      	<%= form_tag add_to_cart_path do %>
+			      		<%= hidden_field_tag :product_id, product.id %>
+			      		<%= number_field_tag :quantity, nil, placeholder: "How Many?", min: 1 %>
+			      		<%= submit_tag "Add to Cart", class: "btn btn-primary" %>
+			      	<% end %>
+			      </div>
+			    <% end %>
+		    </div>
+		  </div>
+		</div>
+
+		<script>
+			$(document).ready(function(){
+
+				$('#expand_descr<%= product.id %>').click(function(){
+					$('#descr<%= product.id %>').html('<%= product.description %>');
+				})
+
+			})
+		</script>
+
+	<% end %>
+</div>
+</body>

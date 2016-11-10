@@ -19,6 +19,9 @@ gem 'pry-rails'
 gem 'better_errors', group: :development
 gem 'rubocop', require: false
 gem 'binding_of_caller'
+gem 'figaro'
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

@@ -9,11 +9,15 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="css/custom.scss.erb">
+
   </head>
 
   <body class="bioRhyme">
+
     <nav class="navbar navbar-default">
       <div class="container-fluid">
+
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
@@ -45,13 +49,17 @@
               </ul>
             </li>
           </ul>
-            
+
 
           <ul class="nav navbar-nav navbar-right">
+             <li>
+              <%= link_to "Cart", view_order_path %>
+            </li>
             <% if user_signed_in? %>
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Welcome, <%= current_user.email  %> <span class="caret"></span></a>
                   <ul class="dropdown-menu">
+                   
                     <li>
                       <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
                     </li>
@@ -66,12 +74,16 @@
               <% end %>
           </ul>
         </div>
+
       </div>
     </nav>
 
 
   	<div class="container">
+
 	    <%= yield %>
+
   	</div>
+
   </body>
 </html>
